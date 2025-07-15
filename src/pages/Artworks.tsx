@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import axios from '../api/axios';
 import cateBanner from '../assets/categories/cate_banner.svg';
 import art1 from '../assets/home/art1.svg';
 import art2 from '../assets/home/art2.svg';
@@ -6,9 +8,39 @@ import art4 from '../assets/home/art4.svg';
 import art5 from '../assets/home/art5.svg';
 import art6 from '../assets/home/art6.svg';
 
+type Category = {
+    id: number;
+    name: string;
+    description: string;
+    parent: number | null;
+};
+
 const images = [art1, art2, art3, art4, art5, art6];
 
 export default function Categories() {
+    const [categories, setCategories] = useState([]);
+    const [grouped, setGrouped] = useState({});
+    const [selected, setSelected] = useState<{ [key: number]: boolean }>({});
+
+    useEffect(() => {
+        axios.get('/products/categories/')
+            .then(res => {
+                setCategories(res.data);
+                // 分组逻辑
+                const parents: Category[] = res.data.filter((c: Category) => !c.parent);
+                const groupObj: Record<string, Category[]> = {};
+                parents.forEach((parent: Category) => {
+                    groupObj[parent.name] = res.data.filter((c: Category) => c.parent === parent.id);
+                });
+                setGrouped(groupObj);
+            });
+    }, []);
+
+    // 勾选框切换
+    const handleCheck = (id: number) => {
+        setSelected((prev: Record<number, boolean>) => ({ ...prev, [id]: !prev[id] }));
+    };
+
     return (
         <>
             {/* 顶部横幅 Banner，撑满全屏 */}
@@ -57,38 +89,25 @@ export default function Categories() {
                 {/* 筛选栏 */}
                 <aside style={{width: 220, marginRight: 36}}>
                     <div style={{fontWeight: 600, fontSize: 18, marginBottom: 18}}>Filters</div>
-                    <div style={{color: '#222', fontWeight: 500, marginBottom: 8}}>Theme Classification</div>
-                    <div style={{marginBottom: 16}}>
-                        <div><input type="checkbox" /> Painting</div>
-                        <div><input type="checkbox" /> 3D/2D Art</div>
-                        <div><input type="checkbox" /> Trendy Toys</div>
-                        <div><input type="checkbox" /> Peripherals</div>
-                        <div><input type="checkbox" /> Handicraft</div>
-                    </div>
-                    <div style={{color: '#222', fontWeight: 500, marginBottom: 8}}>Price Classification</div>
-                    <div style={{marginBottom: 16}}>
-                        <div><input type="checkbox" /> Below 150$</div>
-                        <div><input type="checkbox" /> 150$ - 750$</div>
-                        <div><input type="checkbox" /> 750$ - 1250$</div>
-                        <div><input type="checkbox" /> 1250$ - 2500$</div>
-                        <div><input type="checkbox" /> Above 2500$</div>
-                    </div>
-                    <div style={{color: '#222', fontWeight: 500, marginBottom: 8}}>Area Classification</div>
-                    <div style={{marginBottom: 16}}>
-                        <div><input type="checkbox" /> Below 50 cm²</div>
-                        <div><input type="checkbox" /> 50 - 350 cm²</div>
-                        <div><input type="checkbox" /> Above 350 cm²</div>
-                    </div>
-                    <div style={{color: '#222', fontWeight: 500, marginBottom: 8}}>Use</div>
-                    <div style={{marginBottom: 16}}>
-                        <div><input type="checkbox" /> Wall Decoration</div>
-                        <div><input type="checkbox" /> Desktop Ornament</div>
-                        <div><input type="checkbox" /> Clothing Accessory</div>
-                        <div><input type="checkbox" /> Portable Use</div>
-                        <div><input type="checkbox" /> Gift and Souvenir</div>
-                        <div><input type="checkbox" /> Home Use</div>
-                        <div><input type="checkbox" /> Virtual Application</div>
-                    </div>
+                    {(Object.entries(grouped) as [string, Category[]][]).map(([group, children]) => (
+                        <div key={group} style={{marginBottom: 18}}>
+                            <div style={{color: '#222', fontWeight: 500, marginBottom: 8}}>{group}</div>
+                            <div>
+                                {children.map((child: Category) => (
+                                    <label key={child.id} className="filter-checkbox-label" style={{width: '100%', display: 'flex', alignItems: 'center', marginBottom: 8}}>
+                                        <input
+                                            type="checkbox"
+                                            className="filter-checkbox"
+                                            checked={!!selected[child.id]}
+                                            onChange={() => handleCheck(child.id)}
+                                            style={{marginRight: 10}}
+                                        />
+                                        <span>{child.name}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                     <button style={{marginTop: 12, width: '100%', background: '#111', color: '#fff', border: 'none', borderRadius: 8, padding: '12px 0', fontWeight: 600, fontSize: 16, cursor: 'pointer'}}>Apply Filters</button>
                 </aside>
                 {/* 作品区 */}
