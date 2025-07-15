@@ -58,7 +58,7 @@ export default function AboutUs() {
                         <div style={{fontWeight: 600, fontSize: 17}}>Lucas Lu</div>
                         <div style={{color: '#666', fontSize: 15, marginBottom: 6}}>Co-Founder & CTO</div>
                         <div style={{fontSize: 15, color: '#444', lineHeight: 1.7}}>
-                            Lucas is a tech enthusiast and full-stack developer, dedicated to building robust and user-friendly platforms. He ensures Blend Lumina delivers a seamless experience for all users.
+                            Lucas Lu is a tech enthusiast and full-stack developer, dedicated to building robust and user-friendly platforms. He ensures Blend Lumina delivers a seamless experience for all users.
                         </div>
                     </div>
                 </div>
