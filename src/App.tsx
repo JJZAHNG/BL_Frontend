@@ -5,7 +5,9 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Artworks from './pages/Artworks'
-
+import Categories from './pages/Categories'
+import Contact from './pages/Contact';
+import AboutUs from './pages/AboutUs';
 
 
 function App() {
@@ -19,6 +21,9 @@ function App() {
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/artworks" element={<Artworks/>}/>
+                        <Route path="/categories" element={<Categories/>}/>
+                        <Route path="/contact" element={<Contact/>}/>
+                        <Route path="/aboutus" element={<AboutUs/>}/>
                     </Routes>
                 </main>
                 <Footer/>
