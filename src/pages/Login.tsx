@@ -2,12 +2,14 @@
 import {useState} from 'react'
 import axios from '../api/axios'
 import {useNavigate, Link} from 'react-router-dom'
+import {useAuth} from '../context/AuthContext'
 
 export default function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate()
+    const { login: authLogin } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -16,6 +18,7 @@ export default function Login() {
             const token = response.data.access
             localStorage.setItem('access_token', token)
             setError('')
+            await authLogin(token) // 立即设置 user
             navigate('/')
         } catch (err) {
             setError('Invalid username or password')

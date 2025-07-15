@@ -45,13 +45,15 @@ export default function FilterBar({categories, onFilterChange}: Props) {
             <div className="filter-group">
                 <span className="filter-label">Category:</span>
                 {(showAllCategories ? categories : categories.slice(0, MAX_VISIBLE)).map((cat) => (
-                    <button
-                        key={cat.id}
-                        className={`filter-option ${selectedCategoryId === cat.id ? "selected" : ""}`}
-                        onClick={() => handleCategoryClick(cat.id)}
-                    >
-                        {cat.name}
-                    </button>
+                    <label key={cat.id} className="filter-checkbox-label">
+                        <input
+                            type="checkbox"
+                            className="filter-checkbox"
+                            checked={selectedCategoryId === cat.id}
+                            onChange={() => handleCategoryClick(cat.id)}
+                        />
+                        <span>{cat.name}</span>
+                    </label>
                 ))}
                 {categories.length > MAX_VISIBLE && (
                     <button
@@ -66,17 +68,15 @@ export default function FilterBar({categories, onFilterChange}: Props) {
             <div className="filter-group">
                 <span className="filter-label">Price:</span>
                 {priceRanges.map(({label, value}) => (
-                    <button
-                        key={label}
-                        className={`filter-option ${
-                            selectedPriceRange?.[0] === value[0] && selectedPriceRange?.[1] === value[1]
-                                ? "selected"
-                                : ""
-                        }`}
-                        onClick={() => handlePriceClick(value)}
-                    >
-                        {label}
-                    </button>
+                    <label key={label} className="filter-checkbox-label">
+                        <input
+                            type="checkbox"
+                            className="filter-checkbox"
+                            checked={selectedPriceRange?.[0] === value[0] && selectedPriceRange?.[1] === value[1]}
+                            onChange={() => handlePriceClick(value)}
+                        />
+                        <span>{label}</span>
+                    </label>
                 ))}
             </div>
         </div>

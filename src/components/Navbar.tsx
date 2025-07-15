@@ -18,7 +18,7 @@ export function Navbar() {
                     <div style={{display: 'flex', alignItems: 'center', gap: 32}}>
                         <ul className="nav-links" style={{gap: 24}}>
                             <li><Link to="/">Home</Link></li>
-                            <li><Link to="/categories">Categories</Link></li>
+                            <li><Link to="/artworks">Categories</Link></li>
                             <li><Link to="/history">History</Link></li>
                         </ul>
                         <div style={{display: 'flex', alignItems: 'center', gap: 24}}>

@@ -384,3 +384,20 @@ main {
         flex-direction: column;
     }
 }
+
+/* FilterBar 勾选框和label对齐样式 */
+.filter-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.filter-checkbox {
+    width: 22px;
+    height: 22px;
+    accent-color: #6366f1; /* 让勾选色和主色调一致 */
+    cursor: pointer;
+}
