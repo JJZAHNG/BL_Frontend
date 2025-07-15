@@ -1,69 +1,88 @@
-# React + TypeScript + Vite
+# BlendLumina Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18-blue?logo=react" alt="React" />
+  <img src="https://img.shields.io/badge/Vite-⚡-yellow?logo=vite" alt="Vite" />
+  <img src="https://img.shields.io/badge/TypeScript-4.9-blue?logo=typescript" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="License" />
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome" />
+</p>
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 BlendLumina Frontend
 
-## Expanding the ESLint configuration
+BlendLumina 是一个现代化的数字艺术品电商平台前端，致力于为用户提供极致的艺术品浏览、筛选与交易体验。
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✨ 特性
+- 响应式设计，适配多端设备
+- 精美的首页分类与艺术品展示
+- 用户注册、登录、个人主页
+- 艺术品筛选、价格区间过滤
+- 现代化 UI/UX，极致交互体验
+- 代码结构清晰，易于扩展
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ 技术栈
+- [React 18+](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Axios](https://axios-http.com/)
+- [CSS Modules / CSS-in-JS]
+
+---
+
+## ⚡ 快速启动
+
+```bash
+# 安装依赖
+$ yarn install
+
+# 启动开发环境
+$ yarn dev
+
+# 构建生产环境
+$ yarn build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📁 目录结构
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+blendlumina_frontend/
+├── public/                # 静态资源
+├── src/
+│   ├── api/               # API 封装
+│   ├── assets/            # 图片、SVG 等资源
+│   ├── components/        # 通用组件
+│   ├── context/           # 全局上下文
+│   ├── hooks/             # 自定义 hooks
+│   ├── pages/             # 页面组件
+│   ├── styles/            # 全局样式
+│   └── utils/             # 工具函数
+├── index.html
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
+```
+
+---
+
+## 🤝 贡献指南
+欢迎任何形式的贡献！
+1. Fork 本仓库
+2. 新建分支 (`git checkout -b feature/your-feature`)
+3. 提交更改 (`git commit -am 'Add new feature'`)
+4. 推送分支 (`git push origin feature/your-feature`)
+5. 创建 Pull Request
+
+---
+
+## 📄 License
+
+[MIT](./LICENSE)
